@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature id="org.infinitest.eclipse.feature" label="Infinitest" version="5.1.94.qualifier">
+
+  <requires>
+    <import plugin="org.eclipse.ui" version="3.4.0" match="greaterOrEqual" />
+  </requires>
+
+  <plugin id="org.infinitest.eclipse" download-size="0" install-size="0" version="0.0.0" />
+
+</feature>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <parent>
+    <groupId>org.infinitest</groupId>
+    <artifactId>infinitest-parent</artifactId>
+    <version>5.1.94-SNAPSHOT</version>
+  </parent>
+
+  <name>Infinitest Plugin for Eclipse</name>
+  <groupId>org.infinitest</groupId>
+  <artifactId>infinitest-eclipse</artifactId>
+  <packaging>pom</packaging>
+
+  <modules>
+    <module>org.infinitest.eclipse</module>
+    <module>org.infinitest.eclipse.test</module>
+    <module>org.infinitest.eclipse.feature</module>
+    <module>org.infinitest.eclipse.site</module>
+  </modules>
+
+  <properties>
+    <tycho.version>0.13.0</tycho.version>
+
+    <orbit-repository-url>http://download.eclipse.org/tools/orbit/downloads/drops/R20110523182458/repository/</orbit-repository-url>
+  </properties>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <!-- Tycho plugins -->
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>target-platform-configuration</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-surefire-plugin</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.eclipse.tycho</groupId>
+          <artifactId>tycho-packaging-plugin</artifactId>
+          <version>${tycho.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+
+    <plugins>
+      <plugin>
+        <groupId>org.eclipse.tycho</groupId>
+        <artifactId>tycho-maven-plugin</artifactId>
+        <version>${tycho.version}</version>
+        <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>e3.5</id>
+      <activation>
+        <property>
+          <name>!target-profile</name>
+        </property>
+      </activation>
+      <properties>
+        <target-platform>infinitest-e3.5</target-platform>
+        <platform-repository-url>http://download.eclipse.org/releases/galileo/</platform-repository-url>
+      </properties>
+    </profile>
+    <profile>
+      <id>e3.6</id>
+      <activation>
+        <property>
+          <name>target-profile</name>
+          <value>e3.6</value>
+         </property>
+      </activation>
+      <properties>
+        <target-platform>infinitest-e3.6</target-platform>
+        <platform-repository-url>http://download.eclipse.org/releases/helios/</platform-repository-url>
+      </properties>
+    </profile>
+    <profile>
+      <id>e3.7</id>
+      <activation>
+        <property>
+          <name>target-profile</name>
+          <value>e3.7</value>
+         </property>
+      </activation>
+      <properties>
+        <target-platform>infinitest-e3.7</target-platform>
+        <platform-repository-url>http://download.eclipse.org/releases/indigo/</platform-repository-url>
+      </properties>
+    </profile>
+
+    <profile>
+      <id>implicit-target</id>
+      <activation>
+        <property>
+          <name>!explicit-target</name>
+        </property>
+      </activation>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.eclipse.tycho</groupId>
+            <artifactId>target-platform-configuration</artifactId>
+            <configuration>
+              <resolver>p2</resolver>
+              <ignoreTychoRepositories>false</ignoreTychoRepositories>
+              <pomDependencies>consider</pomDependencies>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+      <repositories>
+        <repository>
+          <id>eclipse-platform</id>
+          <layout>p2</layout>
+          <url>${platform-repository-url}</url>
+        </repository>
+        <repository>
+          <id>eclipse-orbit</id>
+          <layout>p2</layout>
+          <url>${orbit-repository-url}</url>
+        </repository>
+      </repositories>
+    </profile>
+  </profiles>
+
+</project>

@@ -1,0 +1,8 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-SymbolicName: org.infinitest.eclipse.test
+Fragment-Host: org.infinitest.eclipse
+Bundle-Version: 5.1.94.qualifier
+Bundle-RequiredExecutionEnvironment: J2SE-1.5,
+ JavaSE-1.6
+Require-Bundle: org.junit;bundle-version="4.0.0"
